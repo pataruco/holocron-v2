@@ -1,27 +1,18 @@
 {
-  "name": "deckdeckgo-starter",
-  "version": "1.0.0-rc.2-2",
-  "description": "The Progressive Web App alternative for simple presentations",
-  "homepage": "https://deckdeckgo.com",
+  "name": "holocron-v2",
+  "version": "2.0",
   "scripts": {
-    "start": "concurrently --kill-others \"npm run watch\" \"npm run dev\"",
-    "start-no-remote": "concurrently --kill-others \"npm run watch-no-remote\" \"npm run dev\"",
-    "dev": "lite-server",
-    "watch": "webpack --watch --mode development",
-    "watch-no-remote": "webpack --watch --mode development --env.no-remote=true",
     "build": "webpack --mode production",
-    "local": "concurrently --kill-others \"webpack --watch --mode development --env.local=true\" \"npm run dev\""
-  },
-  "author": {
-    "name": "David Dal Busco",
-    "email": "david.dalbusco@outlook.com",
-    "web": "https://fluster.io"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/deckgo/deckdeckgo-starter.git"
+    "dev": "lite-server",
+    "lint": "yarn tslint",
+    "local": "concurrently --kill-others \"webpack --watch --mode development --env.local=true\" \"yarn dev\"",
+    "start-no-remote": "concurrently --kill-others \"yarn watch-no-remote\" \"yarn dev\"",
+    "start": "concurrently --kill-others \"yarn watch\" \"yarn dev\"",
+    "watch-no-remote": "webpack --watch --mode development --env.no-remote=true",
+    "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
+    "@types/webpack": "^4.39.1",
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^4.1.2",
     "copy-webpack-plugin": "^5.0.4",
@@ -29,14 +20,23 @@
     "deckdeckgo-webpack-plugins": "^1.0.0-rc.2",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^4.0.0-beta.8",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
     "lite-server": "^2.5.4",
+    "prettier": "^1.18.2",
     "progress-bar-webpack-plugin": "^1.12.1",
     "style-loader": "^1.0.0",
+    "ts-loader": "^6.1.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.6.3",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "workbox-webpack-plugin": "^4.3.1"
   },
-  "license": "MIT",
   "dependencies": {
     "@deckdeckgo/charts": "^1.0.0-rc.1",
     "@deckdeckgo/core": "^1.0.0-rc.1-1",
@@ -61,16 +61,17 @@
     "ionicons": "^4.6.3",
     "web-social-share": "^6.2.0"
   },
-  "keywords": [
-    "ionic",
-    "stencil",
-    "stenciljs",
-    "web components",
-    "pwa",
-    "progressive web app",
-    "presentation",
-    "slides",
-    "slideshow",
-    "talk"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,yml,md}": [
+      "./node_modules/.bin/prettier --write"
+    ],
+    "*.{ts,ts}": [
+      "yarn lint"
+    ]
+  }
 }
