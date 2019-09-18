@@ -17,7 +17,7 @@ export interface ProcessEnv {
 }
 
 const config: webpack.Configuration = {
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -28,7 +28,11 @@ const config: webpack.Configuration = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      { test: /\.ts$/, exclude: /node_modules/, loader: 'ts-loader' },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
 };
 

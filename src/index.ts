@@ -1,9 +1,3 @@
-declare global {
-  interface Window {
-    ROOM_NAME: any;
-  }
-}
-
 import '@ionic/core/css/ionic.bundle.css';
 import './css/alert.css';
 import './css/button.css';
@@ -21,13 +15,19 @@ import './css/variables.css';
 import '@webcomponents/custom-elements';
 
 import * as manifestData from './manifest.json';
+
+declare global {
+  interface Window {
+    ROOM_NAME: any;
+  }
+}
 window.ROOM_NAME = manifestData.name;
 
 import './scripts/actionPlayPause.js';
 import './scripts/actions.js';
 import './scripts/fullscreen.js';
 import './scripts/history.js';
-import './scripts/loading.js';
+import postLoading from './scripts/loading';
 import './scripts/menu.js';
 import './scripts/modalNotes.js';
 import './scripts/modalRemoteControl.js';
