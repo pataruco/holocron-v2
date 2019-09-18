@@ -5,14 +5,13 @@
     "build": "webpack --mode production",
     "dev": "lite-server",
     "lint": "yarn tslint",
-    "local": "concurrently --kill-others \"webpack --watch --mode development --env.local=true\" \"yarn dev\"",
-    "start-no-remote": "concurrently --kill-others \"yarn watch-no-remote\" \"yarn dev\"",
     "start": "concurrently --kill-others \"yarn watch\" \"yarn dev\"",
-    "watch-no-remote": "webpack --watch --mode development --env.no-remote=true",
     "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
-    "@types/webpack": "^4.39.1",
+    "@deckdeckgo/types": "^1.0.0-rc.2",
+    "@types/copy-webpack-plugin": "^5.0.0",
+    "@types/workbox-webpack-plugin": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^4.1.2",
     "copy-webpack-plugin": "^5.0.4",

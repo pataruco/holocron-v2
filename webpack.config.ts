@@ -1,21 +1,22 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-
-const {
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import {
   DeckDeckGoInfoPlugin,
-  DeckDeckGoRemoveNotesPlugin,
   DeckDeckGoMarkdownPlugin,
-} = require('deckdeckgo-webpack-plugins');
+  // @ts-ignore
+} from 'deckdeckgo-webpack-plugins';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+// @ts-ignore
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import webpack from 'webpack';
+import { GenerateSW } from 'workbox-webpack-plugin';
 
-const { GenerateSW } = require('workbox-webpack-plugin');
+export interface ProcessEnv {
+  [key: string]: any;
+}
 
-const webpack = require('webpack');
-
-const path = require('path');
-
-const config = {
+const config: webpack.Configuration = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     filename: '[name].[chunkhash].js',
@@ -54,47 +55,36 @@ const plugins = [
   }),
 ];
 
-module.exports = (env, argv) => {
-  if (argv.mode === 'development' || argv.mode === 'local') {
+const configuration = (
+  env: ProcessEnv,
+  mode: webpack.Configuration['mode'],
+) => {
+  if (mode === 'development') {
     config.devtool = 'source-map';
   }
 
-  if (argv.mode === 'production') {
+  if (mode === 'production') {
     plugins.push(
       new GenerateSW({
-        ignoreURLParametersMatching: [/./],
+        ignoreUrlParametersMatching: [/./],
       }),
     );
     plugins.push(new DeckDeckGoInfoPlugin());
-
-    if (!argv.notes) {
-      plugins.push(new DeckDeckGoRemoveNotesPlugin());
-    }
   }
 
   config.plugins = plugins;
 
-  let processEnv;
-
   if (env && env.local) {
-    processEnv = {
-      'process.env': {
-        SIGNALING_SERVER: JSON.stringify('http://localhost:3002'),
-      },
-    };
-  } else {
-    processEnv = {
-      'process.env': {
-        SIGNALING_SERVER: JSON.stringify('https://api.deckdeckgo.com'),
-      },
-    };
+    plugins.push(
+      new webpack.DefinePlugin({
+        'process.env': {
+          SIGNALING_SERVER: JSON.stringify('http://localhost:3002'),
+        },
+      }),
+    );
   }
-
-  if (env && env.noRemote) {
-    processEnv['process.env']['NO_REMOTE'] = true;
-  }
-
-  plugins.push(new webpack.DefinePlugin(processEnv));
 
   return config;
 };
+
+export default configuration;
