@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+
+    <base href="/"/>
+
+    <title>holocron</title>
+
+    <meta property="og:site_name" content="holocron">
+    <meta property="og:title" content="holocron">
+
+    <meta name="author" content="Create a lightweight presentation using Web Components 🚀">
+
+    <meta name="description" content="Create a lightweight presentation using Web Components 🚀">
+
+    <meta property="og:description" content="Create a lightweight presentation using Web Components 🚀">
+    <meta property="og:site_name" content="holocron">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deckdeckgo.com">
+    <meta property="og:image" content="https://deckdeckgo.com/assets/img/deckdeckgo.png">
+    <meta property="og:image:type" content="image/png">
+
+    <meta name="twitter:site" content="@deckdeckgo">
+    <meta name="twitter:title" content="holocron">
+    <meta name="twitter:description" content="Create a lightweight presentation using Web Components 🚀">
+    <meta name="twitter:image:src" content="https://deckdeckgo.com/assets/img/deckdeckgo.png">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#3880ff">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#3880ff">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    await navigator.serviceWorker.register('service-worker.js');
+                } catch (e) {
+                    console.warn('No service worker registered');
+                }
+            });
+        }
+    </script>
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <style>
+        :root {
+            background: #ffffff;
+            --ion-background-color: #ffffff;
+        }
+
+        deckgo-deck {
+            color: black;
+            --color: black;
+            --ion-text-color: black;
+        }
+
+        /* Until Web Components are loaded, don't display content */
+        body {
+            background: #ffffff;
+        }
+
+        ion-app.loading, ion-app.loading a {
+            color: transparent;
+        }
+
+        ion-app.loading a {
+            color: transparent;
+        }
+
+        ion-app.loading {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+
+<ion-app class="loading">
+    <ion-content force-overscroll="false" scroll-y="false">
+        <deckgo-deck id="slider" pager-percentage="false">
+
+            <!-- Your slides will be injected at build time, use markdown -->
+
+        </deckgo-deck>
+
+        <deckgo-remote></deckgo-remote>
+
+    </ion-content>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="navigation">
+        <button id="play" onclick="playPause('play', true)" class="navigation ion-activatable" style="display: none;">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="play" aria-label="Play video" style="font-size: 1.4em;"></ion-icon>
+        </button>
+
+        <button id="pause" onclick="playPause('pause', true)" class="navigation ion-activatable" style="display: none;">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="pause" aria-label="Pause video" style="font-size: 1.4em;"></ion-icon>
+        </button>
+
+        <button onclick="previousSlide()" class="navigation ion-activatable">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="arrow-back" aria-label="Previous slide" style="font-size: 1.4em;"></ion-icon>
+        </button>
+
+        <button onclick="nextSlide()" class="navigation ion-activatable">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="arrow-forward" aria-label="Next slide" style="font-size: 1.4em;"></ion-icon>
+        </button>
+
+        <button onclick="presentSlidePicker()" class="navigation ion-activatable">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="list" md="md-list" ios="md-list" aria-label="Jump to a particular slide" style="font-size: 1.4em;"></ion-icon>
+        </button>
+
+        <button onclick="toggleFullScreen()" class="navigation ion-activatable hide-on-mobile">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="expand" aria-label="Full screen" style="font-size: 1.4em;"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <!-- Ionic components anchors -->
+    <ion-popover-controller></ion-popover-controller>
+    <ion-modal-controller></ion-modal-controller>
+    <ion-alert-controller></ion-alert-controller>
+
+    <web-social-share show="false" style="--web-social-share-backdrop-opacity: 0.5;">
+        <ion-icon name="logo-twitter" aria-label="Twitter" slot="twitter" style="color: #00aced; font-size: 1.6rem; display: block;"></ion-icon>
+        <ion-icon name="logo-reddit" aria-label="Reddit" slot="reddit" style="font-size: 1.6rem; display: block;"></ion-icon>
+        <ion-icon name="logo-linkedin" aria-label="Linkedin" slot="linkedin" style="color: #0077b5; font-size: 1.6rem; display: block;"></ion-icon>
+        <ion-icon name="mail" slot="email" aria-label="Email" style="color: #ff8ea3; font-size: 1.6rem; display: block;"></ion-icon>
+        <ion-icon name="logo-whatsapp" aria-label="WhatsApp" slot="whatsapp" style="color: #25D366; font-size: 1.6rem; display: block;"></ion-icon>
+    </web-social-share>
+</ion-app>
+
+<noscript>
+    Please enable Javascript to access this presentation.
+</noscript>
+
+</body>
+</html>
