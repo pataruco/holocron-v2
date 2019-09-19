@@ -1,9 +1,9 @@
 const initActions = (): Promise<void> => {
   return new Promise(async resolve => {
-    const slider = document.getElementById('slider');
+    const slider = document.getElementById('slider') as HTMLDeckgoDeckElement;
 
     if (slider) {
-      slider.addEventListener('slidesDidLoad', async slides => {
+      slider.addEventListener('slidesDidLoad', async () => {
         await initActionButtons(slider);
       });
 
@@ -15,7 +15,7 @@ const initActions = (): Promise<void> => {
         await initActionPlayPause(slider);
       });
 
-      slider.addEventListener('slideToChange', async event => {
+      slider.addEventListener('slideToChange', async () => {
         await initActionPlayPause(slider);
       });
     }
@@ -24,7 +24,7 @@ const initActions = (): Promise<void> => {
   });
 };
 
-function initActionButtons(slider) {
+function initActionButtons(slider: HTMLDeckgoDeckElement) {
   return new Promise(async resolve => {
     const ionFab = document.querySelector('ion-fab');
 
@@ -50,7 +50,7 @@ function initActionButtons(slider) {
   });
 }
 
-const initActionPlayPause = deck => {
+const initActionPlayPause = (deck: HTMLDeckgoDeckElement) => {
   return new Promise(async resolve => {
     const playButton = document.getElementById('play');
     const pauseButton = document.getElementById('pause');

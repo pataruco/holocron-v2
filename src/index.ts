@@ -24,7 +24,7 @@ declare global {
 window.ROOM_NAME = manifestData.name;
 
 import './scripts/actionPlayPause.js';
-import './scripts/actions.js';
+import initActions from './scripts/actions';
 import './scripts/fullscreen.js';
 import './scripts/history.js';
 import postLoading from './scripts/loading';
