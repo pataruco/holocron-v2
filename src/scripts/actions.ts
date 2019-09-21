@@ -50,7 +50,7 @@ function initActionButtons(slider: HTMLDeckgoDeckElement) {
   });
 }
 
-const initActionPlayPause = (deck: HTMLDeckgoDeckElement) => {
+export const initActionPlayPause = (deck: HTMLDeckgoDeckElement) => {
   return new Promise(async resolve => {
     const playButton = document.getElementById('play');
     const pauseButton = document.getElementById('pause');

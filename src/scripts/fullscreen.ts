@@ -7,11 +7,15 @@ const initFullscreen = () => {
 
     document.addEventListener(
       'mouseInactivity',
-      async $event => {
-        const navigation = document.querySelector('#navigation');
+      async (event: Event) => {
+        const navigation = document.querySelector(
+          '#navigation',
+        ) as HTMLDeckgoDeckElement;
 
-        if ($event && navigation) {
-          navigation.style.visibility = $event.detail ? 'inherit' : 'hidden';
+        if (event && navigation) {
+          navigation.style.visibility = (event as any).detail
+            ? 'inherit'
+            : 'hidden';
         }
       },
       { passive: true },

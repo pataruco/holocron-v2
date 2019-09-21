@@ -15,23 +15,23 @@ import './css/variables.css';
 import '@webcomponents/custom-elements';
 
 import * as manifestData from './manifest.json';
-
 declare global {
   interface Window {
     ROOM_NAME: any;
   }
 }
+
 window.ROOM_NAME = manifestData.name;
 
 import './scripts/actionPlayPause.js';
 import initActions from './scripts/actions';
 import initFullscreen from './scripts/fullscreen';
-import { postLoadingJumpTo } from './scripts/history';
+import { initDeckHistoryWatch, postLoadingJumpTo } from './scripts/history';
 import postLoading from './scripts/loading';
 import './scripts/menu.js';
 import './scripts/modalNotes.js';
 import './scripts/modalRemoteControl.js';
-import './scripts/remoteControl.js';
+// import { initRemote } from './scripts/remoteControl';
 import './scripts/resize.js';
 import './scripts/slider.js';
 import './scripts/sliderJumpTo.js';
@@ -98,7 +98,5 @@ deckDeckGoElements(window).then(async () => {
 
   await webSocialShareElements(window);
 
-  deckDeckGoRemoteElements(window).then(async () => {
-    await initRemote();
-  });
+  await deckDeckGoRemoteElements(window);
 });
