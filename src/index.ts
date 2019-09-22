@@ -18,6 +18,7 @@ import * as manifestData from './manifest.json';
 declare global {
   interface Window {
     ROOM_NAME: any;
+    ResizeObserver: any;
   }
 }
 
@@ -33,16 +34,18 @@ import initActions from './scripts/actions';
 import initFullscreen from './scripts/fullscreen';
 import { initDeckHistoryWatch, postLoadingJumpTo } from './scripts/history';
 import postLoading from './scripts/loading';
-// import './scripts/menu';
+import * as menu from './scripts/menu';
 import * as modalNotes from './scripts/modalNotes';
-import * as sliderMethods from './scripts/slider';
 // import './scripts/modalRemoteControl.js';
-// import './scripts/resize.js';
+import * as resize from './scripts/resize';
+import * as sliderMethods from './scripts/slider';
 import * as sliderJumpToMethods from './scripts/sliderJumpTo';
 
 setGlobal(sliderMethods);
 setGlobal(sliderJumpToMethods);
 setGlobal(modalNotes);
+setGlobal(resize);
+setGlobal(menu);
 
 import { defineCustomElements as ionicElements } from '@ionic/core/loader';
 ionicElements(window);

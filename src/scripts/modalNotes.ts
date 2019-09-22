@@ -1,6 +1,4 @@
 // Src: https://beta.ionicframework.com/docs/api/modal
-// import '@deckdeckgo/core/dist/types/components';
-// import '@ionic/core/dist/types/components';
 
 export const displaySlideNotes = async () => {
   const deck = document.getElementById('slider') as HTMLDeckgoDeckElement;
