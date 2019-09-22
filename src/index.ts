@@ -21,20 +21,28 @@ declare global {
   }
 }
 
+// lifting methods to the global
+const setGlobal = (object: { [key: string]: any }) =>
+  Object.entries(object).map(
+    ([key, value]) => ((window as { [key: string]: any })[key] = value),
+  );
+
 window.ROOM_NAME = manifestData.name;
 
-import './scripts/actionPlayPause.js';
 import initActions from './scripts/actions';
 import initFullscreen from './scripts/fullscreen';
 import { initDeckHistoryWatch, postLoadingJumpTo } from './scripts/history';
 import postLoading from './scripts/loading';
-import './scripts/menu.js';
-import './scripts/modalNotes.js';
-import './scripts/modalRemoteControl.js';
-// import { initRemote } from './scripts/remoteControl';
-import './scripts/resize.js';
-import './scripts/slider.js';
-import './scripts/sliderJumpTo.js';
+// import './scripts/menu';
+import * as modalNotes from './scripts/modalNotes';
+import * as sliderMethods from './scripts/slider';
+// import './scripts/modalRemoteControl.js';
+// import './scripts/resize.js';
+import * as sliderJumpToMethods from './scripts/sliderJumpTo';
+
+setGlobal(sliderMethods);
+setGlobal(sliderJumpToMethods);
+setGlobal(modalNotes);
 
 import { defineCustomElements as ionicElements } from '@ionic/core/loader';
 ionicElements(window);

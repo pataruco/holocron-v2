@@ -9,3 +9,10 @@
 ## Hola 😁
 
 Dive deeper with the [Getting Started guide](https://docs.deckdeckgo.com/docs)
+
+--- title
+
+```js
+const a = { apple: 'apple' };
+const b = [1, 2, 4];
+```
