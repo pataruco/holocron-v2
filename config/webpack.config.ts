@@ -17,10 +17,10 @@ export interface ProcessEnv {
 }
 
 const config: webpack.Configuration = {
-  entry: path.resolve(__dirname, 'src', 'index.ts'),
+  entry: path.resolve(__dirname, '../src', 'index.ts'),
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [
@@ -43,8 +43,8 @@ const plugins = [
   new HtmlWebpackPlugin({
     hash: true,
     inject: true,
-    template: path.resolve(__dirname, 'src', 'index.html'),
-    path: path.join(__dirname, '../dist/'),
+    template: path.resolve(__dirname, '../src', 'index.html'),
+    // path: path.join(__dirname, '../dist/'),
     filename: 'index.html',
   }),
   new CopyWebpackPlugin([
@@ -55,7 +55,7 @@ const plugins = [
   ]),
   new ProgressBarPlugin(),
   new DeckDeckGoMarkdownPlugin({
-    src: path.resolve(__dirname, 'slides', 'fewd.md'),
+    src: path.resolve(__dirname, '../slides', 'fewd.md'),
   }),
 ];
 
