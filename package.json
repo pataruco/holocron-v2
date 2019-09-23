@@ -2,11 +2,11 @@
   "name": "holocron-v2",
   "version": "2.0",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --config ./config/webpack.config.prod.ts",
     "dev": "lite-server",
     "lint": "yarn tslint",
     "start": "concurrently --kill-others \"yarn watch\" \"yarn dev\"",
-    "watch": "webpack --watch --mode development --config ./config/webpack.config.ts"
+    "watch": "webpack --watch --config ./config/webpack.config.dev.ts"
   },
   "devDependencies": {
     "@deckdeckgo/types": "^1.0.0-rc.2",
