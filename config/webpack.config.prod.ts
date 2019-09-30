@@ -6,14 +6,14 @@ import {
   // @ts-ignore
 } from 'deckdeckgo-webpack-plugins';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
 // @ts-ignore
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import webpack from 'webpack';
 import { GenerateSW } from 'workbox-webpack-plugin';
+import { dist, entry, getSlide, indexHtml } from './config';
 
 const configuration: webpack.Configuration = {
-  entry: path.resolve(__dirname, '../src', 'index.ts'),
+  entry,
   mode: 'production',
   module: {
     rules: [
@@ -26,7 +26,7 @@ const configuration: webpack.Configuration = {
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: dist,
   },
   plugins: [
     new CleanWebpackPlugin({
@@ -35,8 +35,8 @@ const configuration: webpack.Configuration = {
     new HtmlWebpackPlugin({
       hash: true,
       inject: true,
-      template: path.resolve(__dirname, '../src', 'index.html'),
-      path: path.join(__dirname, '../dist/'),
+      template: indexHtml,
+      path: dist,
       filename: 'index.html',
     }),
     new CopyWebpackPlugin([
@@ -51,7 +51,7 @@ const configuration: webpack.Configuration = {
     }),
     new ProgressBarPlugin(),
     new DeckDeckGoMarkdownPlugin({
-      src: path.resolve(__dirname, '../slides', 'fewd.md'),
+      src: getSlide('fewd.md'),
     }),
   ],
   resolve: {
