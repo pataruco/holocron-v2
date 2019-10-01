@@ -36,7 +36,6 @@ import { initDeckHistoryWatch, postLoadingJumpTo } from './scripts/history';
 import postLoading from './scripts/loading';
 import * as menu from './scripts/menu';
 import * as modalNotes from './scripts/modalNotes';
-// import './scripts/modalRemoteControl.js';
 import * as resize from './scripts/resize';
 import * as sliderMethods from './scripts/slider';
 import * as sliderJumpToMethods from './scripts/sliderJumpTo';
