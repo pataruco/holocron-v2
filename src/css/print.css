@@ -1,19 +1,28 @@
 @media print {
+  body {
+    position: inherit;
+  }
 
-    body {
-        position: inherit;
-    }
+  ion-app.ion-page {
+    overflow: visible;
+    contain: none;
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
 
-    ion-app.ion-page {
-        overflow: visible;
-        contain: none;
-    }
+  /* ion-content {
+    contain: none;
+  } */
 
-    ion-content {
-        contain: none;
-    }
+  #navigation {
+    display: none;
+  }
+}
 
-    #navigation {
-        display: none;
-    }
+@page {
+  size: 1210px 681px;
+  margin: 0;
 }
