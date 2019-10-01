@@ -1,44 +1,40 @@
-# DeckDeckGo - Starter Kit
+# Holocron v2.0
 
-Create a PWA presentation using Web Components, [Ionic](http://ionicframework.com) components and HTML or Markdown 🚀
+## What is it?
 
-Cherry on the cake 🍒🎂 [DeckDeckGo] comes with a [Progressive Web App](https://deckdeckgo.app) to remote control your slides 📱
+Is a presentation tool using markdown.
 
-## Table of contents
+## Technologies
 
-- [Stater Kit](#stater-kit)
-- [Getting Started](#getting-started)
-- [Example](#example)
-- [Develop](#develop)
-- [License](#license)
+- TypeScript
+- [DeckDeckGo](https://github.com/deckgo/deckdeckgo)
+- Webpack
 
-## Stater Kit
+## How to run it
 
-This project is the starter kit of [DeckDeckGo].
+- Git clone this repo
+  ```sh
+    git clone git@github.com:pataruco/holocron-v2.git
+  ```
+- Install dependencies
+  ```sh
+    yarn
+  ```
+- Go to [`./config/webpack.config.dev`](./config/webpack.config.dev) and change the parameters of the `getSlide` method with the relative path of your markdown.
 
-Its master branch contains the `HTML` starter kit. The markdown branch is the `Markdown` one.
+  ```typescript
+  const configuration: webpack.Configuration = {
+    // ...
+    plugins: [
+      // ...
+      new DeckDeckGoMarkdownPlugin({
+        src: getSlide('fewd.md'), // here
+      }),
+    ],
+  };
+  ```
 
-## Getting Started
-
-Start you new presentation by following the quick  👉 [Getting Started guide](https://docs.deckdeckgo.com/docs) 👈
-
-## Example
-   
-The [DeckDeckGo website](https://github.com/deckgo/deckdeckgo-website) is a full featured presentation developed with [DeckDeckGo].
-
-## Develop
-
-To develop and run this starter kit locally, proceed as following:
-
-```
-git clone https://github.com/deckgo/deckdeckgo-starter
-cd deckdeckgo-starter
-npm install
-npm run start
-```
-
-## License
-
-MIT © [David Dal Busco](mailto:david.dalbusco@outlook.com) and [Nicolas Mattia](nicolas@nmattia.com)
-
-[DeckDeckGo]: https://deckdeckgo.com
+- To present just run 💥
+  ```sh
+    yarn start
+  ```
